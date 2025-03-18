@@ -2,6 +2,7 @@ FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www
 
+# Installer les dépendances nécessaires
 RUN apk add --no-cache \
     curl \
     libpng-dev \
@@ -10,9 +11,18 @@ RUN apk add --no-cache \
     oniguruma-dev \
     zip \
     unzip \
-    bash
+    bash \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    libzip-dev \
+    libxml2-dev \
+    freetype \
+    jpegoptim \
+    optipng
 
-# Installer les extensions PHP via "docker-php-ext-install"
+# Installer les extensions PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd mbstring pdo pdo_mysql tokenizer xml zip bcmath
 
