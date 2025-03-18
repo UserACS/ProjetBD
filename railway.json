@@ -1,6 +1,6 @@
 {
     "build": {
-        "command": "nix-env -iA nixpkgs.php81 && composer install && php artisan key:generate && php artisan migrate --force"
+        "command": "nix-env -iA nixpkgs.php81 && composer install"
     },
     "deploy": {
         "command": "php artisan serve --host=0.0.0.0 --port=8000"
