@@ -2,7 +2,19 @@ FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www
 
-RUN apk add --no-cache php8-mbstring php8-xml php8-bcmath php8-curl php8-tokenizer php8-ctype php8-json php8-openssl php8-session php8-pdo php8-pdo_mysql php8-fileinfo php8-zip
+RUN apk add --no-cache \
+    curl \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    oniguruma-dev \
+    zip \
+    unzip \
+    bash
+
+# Installer les extensions PHP via "docker-php-ext-install"
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd mbstring pdo pdo_mysql tokenizer xml zip bcmath
 
 COPY . .
 
